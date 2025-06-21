@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registro - Argentour</title>
+  <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-box">
+      <h2>Bienvenido a tu próximo viaje</h2>
+      
+      <div class="social-login">
+        <button class="social-btn facebook">
+          <i class="fab fa-facebook-f"></i>
+          Acceder con Facebook
+        </button>
+        <button class="social-btn google">
+          <i class="fab fa-google"></i>
+          Acceder con Google
+        </button>
+      </div>
+      
+      <div class="checkbox-container">
+        <input type="checkbox" checked>
+        <span class="checkmark"></span>
+        Acceder con tu email
+      </div>
+      
+      <div class="error-message" id="error-message"></div>
+      
+      <div class="input-group">
+        <i class="fas fa-envelope"></i>
+        <input type="email" id="email" placeholder="Correo electrónico" required>
+      </div>
+      
+      <div class="input-group">
+        <i class="fas fa-lock"></i>
+        <input type="password" id="password" placeholder="Contraseña" required>
+      </div>
+      
+      <button onclick="registrar()">
+        <span id="button-text">Registrarse</span>
+        <span id="loading" style="display: none;"><i class="fas fa-spinner"></i></span>
+      </button>
+      
+      <div class="checkbox-container" style="margin-top: 1rem;">
+        <input type="checkbox">
+        <span class="checkmark"></span>
+        Registrate
+      </div>
+      
+      <p class="auth-footer">¿Ya tienes cuenta? <a href="inicios.html">Inicia sesión</a></p>
+    </div>
+  </div>
+
+  <script>
+    function registrar() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+      const buttonText = document.getElementById('button-text');
+      const loading = document.getElementById('loading');
+      
+      // Resetear mensaje de error
+      errorMessage.style.display = 'none';
+      
+      // Validación simple
+      if (!email || !password) {
+        errorMessage.textContent = "Por favor complete todos los campos";
+        errorMessage.style.display = 'block';
+        return;
+      }
+      
+      // Mostrar estado de carga
+      buttonText.textContent = "Registrando...";
+      loading.style.display = 'inline-block';
+      
+      fetch('http://localhost:3000/api/auth/registro', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          // Efecto visual de éxito
+          document.querySelector('.auth-box').style.boxShadow = '0 0 0 3px rgba(76, 201, 240, 0.5)';
+          setTimeout(() => {
+            window.location.href = "index.html";
+          }, 1000);
+        } else {
+          errorMessage.textContent = data.mensaje || "Error en el registro";
+          errorMessage.style.display = 'block';
+        }
+      })
+      .catch(error => {
+        errorMessage.textContent = "Error de conexión con el servidor";
+        errorMessage.style.display = 'block';
+      })
+      .finally(() => {
+        buttonText.textContent = "Registrarse";
+        loading.style.display = 'none';
+      });
+    }
+  </script>
+</body>
+</html>

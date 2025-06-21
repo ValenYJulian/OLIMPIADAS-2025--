@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Buscar - Argentour</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+        /* Estilos generales */
+        body {
+            background-color: white;
+            color: #333;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        /* Menú hamburguesa */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .navbar {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            
+            .navbar.active {
+                display: block;
+            }
+            
+            .navbar ul {
+                flex-direction: column;
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+            
+            .navbar li {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Formulario de búsqueda */
+        .search-hero {
+            background-color: #f8f9fa;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+        
+        .search-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .form-group i {
+            position: absolute;
+            left: 15px;
+            top: 38px;
+            color: #777;
+        }
+        
+        .btn-search {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .btn-search:hover {
+            background-color: #0052a3;
+        }
+
+        /* Resultados de búsqueda */
+        .search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px 40px;
+        }
+        
+        .search-title {
+            margin-bottom: 20px;
+            color: #222;
+        }
+        
+        .search-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .result-card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .result-img {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .result-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .result-card:hover .result-img img {
+            transform: scale(1.05);
+        }
+        
+        .result-info {
+            padding: 20px;
+        }
+        
+        .result-info h3 {
+            margin: 0 0 10px;
+            color: #222;
+            font-size: 18px;
+        }
+        
+        .result-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .result-price {
+            font-weight: bold;
+            color: #0066cc;
+            font-size: 18px;
+        }
+        
+        .btn-view {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .btn-view:hover {
+            background-color: #0052a3;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #555;
+            grid-column: 1 / -1;
+        }
+        
+        .no-results i {
+            font-size: 50px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="Argentour - Inicio">
+                <img src="imagenes/logo-argentour.jpg" alt="Argentour Logo" width="120" height="60" loading="lazy">
+                <span>Argentour</span>
+            </a>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="navbar">
+                <i class="fas fa-bars"></i>
+                <span class="sr-only">Menú</span>
+            </button>
+            
+            <nav class="navbar" id="navbar">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="paquetes.html">Paquetes</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <button id="search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                <div class="cart-wrapper">
+                    <button id="cart-btn" aria-label="Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+                <button id="user-btn" aria-label="Usuario"><i class="fas fa-user"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Formulario de búsqueda -->
+    <section class="search-hero">
+        <form class="search-form" id="search-form">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="destination">Destino</label>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" id="destination" placeholder="¿A dónde quieres ir?">
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Fecha</label>
+                    <i class="far fa-calendar"></i>
+                    <input type="text" id="date" placeholder="Selecciona fecha" onfocus="(this.type='date')">
+                </div>
+                
+                <div class="form-group">
+                    <label for="people">Personas</label>
+                    <i class="fas fa-user-friends"></i>
+                    <select id="people">
+                        <option value="">Cantidad</option>
+                        <option value="1">1 persona</option>
+                        <option value="2">2 personas</option>
+                        <option value="3">3 personas</option>
+                        <option value="4">4 personas</option>
+                        <option value="5+">5+ personas</option>
+                    </select>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-search">
+                <i class="fas fa-search"></i> Buscar paquetes
+            </button>
+        </form>
+    </section>
+
+    <!-- Resultados de búsqueda -->
+    <main class="search-container">
+        <h1 class="search-title">Paquetes disponibles</h1>
+        
+        <div class="search-results" id="search-results">
+            <!-- Los resultados se cargarán aquí dinámicamente -->
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <p>Realiza una búsqueda para ver los paquetes disponibles</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manejo del menú hamburguesa
+            const menuToggle = document.getElementById('menu-toggle');
+            const navbar = document.getElementById('navbar');
+            
+            menuToggle.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                navbar.classList.toggle('active');
+            });
+
+            // Datos de los paquetes (simulados - en un caso real vendrían de una API)
+            const paquetes = [
+                {
+                    id: 1,
+                    nombre: "Cataratas del Iguazú",
+                    imagen: "imagenes/cataratas del iguazu.jpeg",
+                    ubicacion: "Misiones",
+                    precio: 32500,
+                    duracion: "3 días / 2 noches",
+                    rating: 4.9,
+                    fechaDisponible: "2023-12-15",
+                    capacidad: 4
+                },
+                {
+                    id: 2,
+                    nombre: "Bariloche y la Ruta de los Siete Lagos",
+                    imagen: "imagenes/bariloche.jpg",
+                    ubicacion: "Río Negro",
+                    precio: 45999,
+                    duracion: "5 días / 4 noches",
+                    rating: 4.8,
+                    fechaDisponible: "2023-12-20",
+                    capacidad: 6
+                },
+                {
+                    id: 3,
+                    nombre: "Cerro de Siete Colores",
+                    imagen: "imagenes/cerro de los 7 colores.jpg",
+                    ubicacion: "Jujuy",
+                    precio: 28750,
+                    duracion: "4 días / 3 noches",
+                    rating: 4.7,
+                    fechaDisponible: "2024-01-10",
+                    capacidad: 4
+                },
+                {
+                    id: 4,
+                    nombre: "Bella Vista",
+                    imagen: "imagenes/mantilla corrientes.jpg",
+                    ubicacion: "Corrientes",
+                    precio: 26300,
+                    duracion: "3 días / 2 noches",
+                    rating: 4.6,
+                    fechaDisponible: "2023-12-25",
+                    capacidad: 2
+                },
+                {
+                    id: 5,
+                    nombre: "Mar del Plata",
+                    imagen: "imagenes/mar del plata.webp",
+                    ubicacion: "Buenos Aires",
+                    precio: 27800,
+                    duracion: "4 días / 3 noches",
+                    rating: 4.5,
+                    fechaDisponible: "2024-01-05",
+                    capacidad: 5
+                },
+                {
+                    id: 6,
+                    nombre: "Tren de las Nubes",
+                    imagen: "imagenes/tren-a-las-nubes.webp",
+                    ubicacion: "Salta",
+                    precio: 38500,
+                    duracion: "5 días / 4 noches",
+                    rating: 4.9,
+                    fechaDisponible: "2024-02-15",
+                    capacidad: 8
+                },
+                {
+                    id: 7,
+                    nombre: "Ushuaia - Fin del Mundo",
+                    imagen: "imagenes/tierra del fuego.webp",
+                    ubicacion: "Tierra del Fuego",
+                    precio: 42300,
+                    duracion: "6 días / 5 noches",
+                    rating: 4.7,
+                    fechaDisponible: "2024-01-20",
+                    capacidad: 4
+                },
+                {
+                    id: 8,
+                    nombre: "Puerto Madryn",
+                    imagen: "imagenes/avistaje-de-ballenas_107_201605050852271.Mobile.jpg",
+                    ubicacion: "Chubut",
+                    precio: 29900,
+                    duracion: "4 días / 3 noches",
+                    rating: 4.6,
+                    fechaDisponible: "2024-02-01",
+                    capacidad: 6
+                },
+                {
+                    id: 9,
+                    nombre: "Ruta del Vino Mendocina",
+                    imagen: "imagenes/vino.webp",
+                    ubicacion: "Mendoza",
+                    precio: 31200,
+                    duracion: "3 días / 2 noches",
+                    rating: 4.8,
+                    fechaDisponible: "2023-12-30",
+                    capacidad: 4
+                },
+                {
+                    id: 10,
+                    nombre: "El Bolsón y sus Bosques",
+                    imagen: "imagenes/que-hacer-en-el-bolson.webp",
+                    ubicacion: "Río Negro",
+                    precio: 27600,
+                    duracion: "3 días / 2 noches",
+                    rating: 4.5,
+                    fechaDisponible: "2024-01-15",
+                    capacidad: 3
+                }
+            ];
+
+            // Obtener parámetros de búsqueda de la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const destination = urlParams.get('destination') || '';
+            const date = urlParams.get('date') || '';
+            const people = urlParams.get('people') || '';
+
+            // Mostrar resultados iniciales si hay parámetros de búsqueda
+            if (destination || date || people) {
+                document.getElementById('destination').value = destination;
+                document.getElementById('date').value = date;
+                document.getElementById('people').value = people;
+                buscarPaquetes(destination, date, people);
+            }
+
+            // Manejar el formulario de búsqueda
+            document.getElementById('search-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const destination = document.getElementById('destination').value.trim();
+                const date = document.getElementById('date').value;
+                const people = document.getElementById('people').value;
+                
+                // Actualizar la URL con los parámetros de búsqueda
+                const params = new URLSearchParams();
+                if (destination) params.append('destination', destination);
+                if (date) params.append('date', date);
+                if (people) params.append('people', people);
+                
+                window.history.pushState({}, '', `busqueda.html?${params.toString()}`);
+                
+                // Realizar la búsqueda
+                buscarPaquetes(destination, date, people);
+            });
+
+            // Función para buscar paquetes
+            function buscarPaquetes(destination, date, people) {
+                const resultsContainer = document.getElementById('search-results');
+                const destinationTerm = destination.toLowerCase();
+                const peopleNum = people ? parseInt(people) : 0;
+                
+                // Filtrar paquetes que coincidan con los criterios de búsqueda
+                const resultados = paquetes.filter(paquete => {
+                    // Coincidencia con destino
+                    const matchDestination = !destination || 
+                        paquete.nombre.toLowerCase().includes(destinationTerm) || 
+                        paquete.ubicacion.toLowerCase().includes(destinationTerm);
+                    
+                    // Coincidencia con fecha
+                    const matchDate = !date || paquete.fechaDisponible >= date;
+                    
+                    // Coincidencia con cantidad de personas
+                    const matchPeople = !people || 
+                        (people === '5+' ? paquete.capacidad >= 5 : paquete.capacidad >= peopleNum);
+                    
+                    return matchDestination && matchDate && matchPeople;
+                });
+
+                // Mostrar resultados
+                if (resultados.length > 0) {
+                    let html = '';
+                    resultados.forEach(paquete => {
+                        html += `
+                            <div class="result-card">
+                                <div class="result-img">
+                                    <img src="${paquete.imagen}" alt="${paquete.nombre}" loading="lazy">
+                                </div>
+                                <div class="result-info">
+                                    <h3>${paquete.nombre}</h3>
+                                    <div class="result-meta">
+                                        <span><i class="fas fa-map-marker-alt"></i> ${paquete.ubicacion}</span>
+                                        <span><i class="fas fa-star"></i> ${paquete.rating}</span>
+                                    </div>
+                                    <div class="result-meta">
+                                        <span>${paquete.duracion}</span>
+                                        <span class="result-price">$${paquete.precio.toLocaleString()}</span>
+                                    </div>
+                                    <div class="result-meta">
+                                        <span><i class="far fa-calendar"></i> ${formatDate(paquete.fechaDisponible)}</span>
+                                        <span><i class="fas fa-users"></i> Máx. ${paquete.capacidad} personas</span>
+                                    </div>
+                                    <a href="paquete-detalle.html?paquete=${paquete.id}" class="btn-view">Ver paquete</a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    resultsContainer.innerHTML = html;
+                } else {
+                    resultsContainer.innerHTML = `
+                        <div class="no-results">
+                            <i class="fas fa-search"></i>
+                            <p>No encontramos paquetes que coincidan con tu búsqueda.</p>
+                            <p>Prueba con otros criterios.</p>
+                        </div>
+                    `;
+                }
+            }
+
+            // Función para formatear fechas
+            function formatDate(dateString) {
+                if (!dateString) return '';
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString('es-AR', options);
+            }
+        });
+    </script>
+</body>
+</html>

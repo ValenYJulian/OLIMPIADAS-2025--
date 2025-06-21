@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Completo de Paquetes - Argentour</title>
+    <meta name="description" content="Información detallada de todos nuestros paquetes turísticos en Argentina con hoteles, comidas y guías">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background-color: white;
+            color: #333;
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .packages-header {
+            text-align: center;
+            padding: 3rem 1rem;
+            background-color: #f9f9f9;
+            margin-top: 80px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .packages-header h1 {
+            font-size: 2.5rem;
+            color: #222;
+            margin-bottom: 1rem;
+        }
+        
+        .packages-header p {
+            color: #555;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .packages-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .package-section {
+            margin-bottom: 3rem;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .package-header {
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #0066cc 0%, #004d99 100%);
+            color: white;
+            padding: 1.5rem;
+        }
+        
+        .package-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .package-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .package-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .package-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+        }
+        
+        .package-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 1.5rem;
+        }
+        
+        @media (min-width: 992px) {
+            .package-content {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        .package-details h2 {
+            font-size: 1.5rem;
+            color: #0066cc;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .package-details h3 {
+            font-size: 1.3rem;
+            color: #444;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .package-details p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .package-details ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        
+        .package-details li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .package-sidebar {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            height: fit-content;
+        }
+        
+        .hotel-info {
+            margin-bottom: 1.5rem;
+        }
+        
+        .hotel-name {
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 0.5rem;
+        }
+        
+        .hotel-features {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .hotel-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .included-services {
+            margin-top: 1.5rem;
+        }
+        
+        .service-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .btn-reserve {
+            display: inline-block;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #0066cc;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-reserve:hover {
+            background-color: #0052a3;
+        }
+        
+        .package-gallery {
+            margin-top: 2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .gallery-item {
+            height: 150px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        @media (max-width: 768px) {
+            .package-header {
+                padding: 1rem;
+            }
+            
+            .package-title {
+                font-size: 1.5rem;
+            }
+            
+            .package-meta {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="imagenes/logo-argentour.jpg" alt="Argentour - Viajes por Argentina" width="180" height="60">
+            </a>
+            <nav class="navbar" role="navigation">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="paquetes.html">Paquetes</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button id="search-btn" aria-label="Buscar"><i class="fas fa-search" role="img"></i></button>
+                <button id="cart-btn" aria-label="Carrito de compras" aria-expanded="false">
+                    <i class="fas fa-shopping-cart" role="img"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button id="user-btn" aria-label="Iniciar sesión"><i class="fas fa-user" role="img"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Encabezado -->
+    <section class="packages-header">
+        <h1>Información Completa de Nuestros Paquetes</h1>
+        <p>Descubre todos los detalles de nuestros paquetes turísticos en Argentina, incluyendo alojamiento, comidas, guías y más</p>
+    </section>
+
+    <!-- Contenido principal -->
+    <main class="packages-container">
+        <!-- Paquete 1: Cataratas del Iguazú -->
+        <section class="package-section">
+            <div class="package-header">
+                <h2 class="package-title">Cataratas del Iguazú</h2>
+                <div class="package-meta">
+                    <span class="package-meta-item"><i class="fas fa-map-marker-alt"></i> Misiones</span>
+                    <span class="package-meta-item"><i class="fas fa-clock"></i> 3 días / 2 noches</span>
+                    <span class="package-meta-item"><i class="fas fa-star"></i> 4.9 (128 reseñas)</span>
+                </div>
+                <div class="package-price">Desde $32.500 por persona</div>
+            </div>
+            
+            <div class="package-content">
+                <div class="package-details">
+                    <h2>Descripción del Paquete</h2>
+                    <p>Vive la experiencia única de conocer una de las 7 Maravillas Naturales del Mundo. Este paquete incluye visitas a ambos lados de las cataratas (argentino y brasileño) con guías especializados.</p>
+                    
+                    <h3>Itinerario</h3>
+                    <ul>
+                        <li><strong>Día 1:</strong> Llegada al aeropuerto de Puerto Iguazú. Traslado al hotel. Tarde libre para disfrutar de las instalaciones.</li>
+                        <li><strong>Día 2:</strong> Visita al Parque Nacional Iguazú (lado argentino) con recorrido por los circuitos superior e inferior. Paseo en la Garganta del Diablo.</li>
+                        <li><strong>Día 3:</strong> Visita al Parque Nacional do Iguaçu (lado brasileño) para vistas panorámicas. Traslado al aeropuerto.</li>
+                    </ul>
+                    
+                    <h3>Incluye</h3>
+                    <ul>
+                        <li>2 noches de alojamiento en hotel 4 estrellas con desayuno</li>
+                        <li>Traslados aeropuerto-hotel-aeropuerto</li>
+                        <li>Entradas a los parques nacionales</li>
+                        <li>Guía bilingüe durante las excursiones</li>
+                        <li>1 almuerzo en el parque (día 2)</li>
+                        <li>Seguro básico de viaje</li>
+                    </ul>
+                    
+                    <div class="package-gallery">
+                        <h3>Galería</h3>
+                        <div class="gallery-grid">
+                            <div class="gallery-item">
+                                <img src="imagenes/cataratas del iguazu.jpeg" alt="Cataratas del Iguazú" loading="lazy">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="imagenes/garganta del diablo.jpg" alt="Garganta del Diablo" loading="lazy">
+                            </div>
+                            <div class="gallery-item">
+                                <img src="imagenes/paque nacional iguazu.jpg" alt="Parque Nacional Iguazú" loading="lazy">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="package-sidebar">
+                    <div class="hotel-info">
+                        <h3>Alojamiento</h3>
+                        <div class="hotel-name">Hotel Panoramic Iguazú ★★★★</div>
+                        <ul class="hotel-features">
+                            <li><i class="fas fa-wifi"></i> WiFi gratuito</li>
+                            <li><i class="fas fa-swimming-pool"></i> Piscina exterior</li>
+                            <li><i class="fas fa-utensils"></i> Restaurante</li>
+                            <li><i class="fas fa-spa"></i> Spa</li>
+                            <li><i class="fas fa-parking"></i> Estacionamiento gratuito</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="included-services">
+                        <h3>Servicios Incluidos</h3>
+                        <div class="service-item"><i class="fas fa-check"></i> Desayuno buffet diario</div>
+                        <div class="service-item"><i class="fas fa-check"></i> Guía turístico bilingüe</div>
+                        <div class="service-item"><i class="fas fa-check"></i> Transporte entre atracciones</div>
+                        <div class="service-item"><i class="fas fa-check"></i> Entradas a parques nacionales</div>
+                        <div class="service-item"><i class="fas fa-check"></i> 1 almuerzo incluido</div>
+                        
+                        <a href="#" class="btn-reserve">Reservar este paquete</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Paquete 2: Bariloche -->
+        <section class="package-section">
+            <div class="package-header">
+                <h2 class="package-title">Bariloche y la Ruta de los Siete Lagos</h2>
+                <div class="package-meta">
+                    <span class="package-meta-item"><i class="fas fa-map-marker-alt"></i> Río Negro</span>
+                    <span class="package-meta-item"><i class="fas fa-clock"></i> 5 días / 4 noches</span>
+                    <span class="package-meta-item"><i class="fas fa-star"></i> 4.8 (95 reseñas)</span>
+                </div>
+                <div class="package-price">Desde $45.999 por persona</div>
+            </div>
+             
+            <div class="package-content">
+                <div class="package-details">
+                    <h2>Descripción del Paquete</h2>
+                    <p>Descubre la joya de la Patagonia argentina con este completo paquete que incluye alojamiento en hotel céntrico, excursiones por los paisajes más impresionantes y degustación de chocolates artesanales.</p>
+                    
+                    <h3>Itinerario</h3>
+                    <ul>
+                        <li><strong>Día 1:</strong> Llegada a Bariloche. Traslado al hotel. Tarde libre para explorar el centro.</li>
+                        <li><strong>Día 2:</strong> Circuito Chico con visita a Cerro Campanario, Puerto Pañuelo y Hotel Llao Llao.</li>
+                        <li><strong>Día 3:</strong> Excursión completa por la Ruta de los Siete Lagos hasta San Martín de los Andes.</li>
+                        <li><strong>Día 4:</strong> Día libre con opción a excursión a Cerro Tronador o Isla Victoria.</li>
+                        <li><strong>Día 5:</strong> Traslado al aeropuerto.</li>
+                    </ul>
+                    
+                    <h3>Incluye</h3>
+                    <ul>
+                        <li>4 noches en Hotel Edelweiss ★★★★ (habitación superior con vista al lago)</li>
+                        <li>Desayuno buffet diario</li>
+                        <li>2 excursiones guiadas (Circuito Chico y Ruta de los Siete Lagos)</li>
+                        <li>Traslados aeropuerto-hotel-aeropuerto</li>
+                        <li>Degustación de chocolates en fábrica local</li>
+                        <li>Cena de bienvenida</li>
+                    </ul>
+                </div>
+                
+                <div class="package-sidebar">
+                    <div class="hotel-info">
+                        <h3>Alojamiento</h3>
+                        <div class="hotel-name">Hotel Edelweiss ★★★★</div>
+                        <ul class="hotel-features">
+                            <li><i class="fas fa-wifi"></i> WiFi gratuito</li>
+                            <li><i class="fas fa-snowflake"></i> Calefacción central</li>
+                            <li><i class="fas fa-utensils"></i> Restaurante gourmet</li>
+                            <li><i class="fas fa-spa"></i> Spa con vista al lago</li>
+                            <li><i class="fas fa-glass-cheers"></i> Bar con terraza</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="included-services">
+                        <h3>Servicios Incluidos</h3>
+                        <div class="service-item"><i class="fas fa-check"></i> Desayuno buffet completo</div>
+                        <div class="service-item"><i class="fas fa-check"></i> Guía especializado en naturaleza</div>
+                        <div class="service-item"><i class="fas fa-check"></i> Transporte en minibús con aire acondicionado</div>
+                        <div class="service-item"><i class="fas fa-check"></i> 1 cena gourmet</div>
+                        <div class="service-item"><i class="fas fa-check"></i> Seguro de asistencia en viaje</div>
+                        
+                        <a href="#" class="btn-reserve">Reservar este paquete</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Paquete 3: Cerro de Siete Colores -->
+        <section class="package-section">
+            <div class="package-header">
+                <h2 class="package-title">Cerro de Siete Colores y Quebrada de Humahuaca</h2>
+                <div class="package-meta">
+                    <span class="package-meta-item"><i class="fas fa-map-marker-alt"></i> Jujuy</span>
+                    <span class="package-meta-item"><i class="fas fa-clock"></i> 4 días / 3 noches</span>
+                    <span class="package-meta-item"><i class="fas fa-star"></i> 4.7 (82 reseñas)</span>
+                </div>
+                <div class="package-price">Desde $28.750 por persona</div>
+            </div>
+            
+            <div class="package-content">
+                <div class="package-details">
+                    <h2>Descripción del Paquete</h2>
+                    <p>Descubre los paisajes únicos del norte argentino con este paquete que incluye visitas al famoso Cerro de Siete Colores, el pueblo de Purmamarca y la Quebrada de Humahuaca, declarada Patrimonio de la Humanidad.</p>
+                    
+                    <h3>Itinerario</h3>
+                    <ul>
+                        <li><strong>Día 1:</strong> Llegada a San Salvador de Jujuy. Traslado a Purmamarca. Tarde libre.</li>
+                        <li><strong>Día 2:</strong> Visita al Cerro de Siete Colores y mercado artesanal. Excursión a Salinas Grandes.</li>
+                        <li><strong>Día 3:</strong> Recorrido por la Quebrada de Humahuaca: Tilcara, Uquía y Humahuaca.</li>
+                        <li><strong>Día 4:</strong> Regreso a San Salvador de Jujuy con visita a Termas de Reyes.</li>
+                    </ul>
+                    
+                    <h3>Incluye</h3>
+                    <ul>
+                        <li>3 noches en hotel boutique en Purmamarca</li>
+                        <li>Desayuno regional diario</li>
+                        <li>Todas las excursiones mencionadas con guía local</li>
+                        <li>2 almuerzos típicos</li>
+                        <li>Entrada a Pucará de Tilcara</li>
+                        <li>Traslados desde/hacia aeropuerto de Jujuy</li>
+                    </ul>
+                </div>
+                
+                <div class="package-sidebar">
+                    <div class="hotel-info">
+                        <h3>Alojamiento</h3>
+                        <div class="hotel-name">Hotel La Comarca ★★★</div>
+                        <ul class="hotel-features">
+                            <li><i class="fas fa-mountain"></i> Vista al cerro</li>
+                            <li><i class="fas fa-utensils"></i> Cocina regional</li>
+                            <li><i class="fas fa-child"></i> Ambiente familiar</li>
+                            <li><i class="fas fa-parking"></i> Estacionamiento seguro</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="included-services">
+                        <h3>Servicios Incluidos</h3>
+                        <div class="service-item"><i class="fas fa-check"></i> Desayuno con productos regionales</div>
+                        <div class="service-item"><i class="fas fa-check"></i> Guía local especializado en cultura</div>
+                        <div class="service-item"><i class="fas fa-check"></i> Transporte en vehículo 4x4</div>
+                        <div class="service-item"><i class="fas fa-check"></i> 2 almuerzos con comida típica</div>
+                        <div class="service-item"><i class="fas fa-check"></i> Entradas a sitios arqueológicos</div>
+                        
+                        <a href="#" class="btn-reserve">Reservar este paquete</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Continuar con los demás paquetes siguiendo la misma estructura -->
+        <!-- Paquetes 4 al 10 seguirían el mismo patrón -->
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Argentour</h4>
+                    <p>Tu agencia de viajes especializada en Argentina. Ofrecemos las mejores experiencias turísticas con calidad y seguridad.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-phone" aria-hidden="true"></i> +54 11 1234-5678</p>
+                    <p><i class="fas fa-envelope" aria-hidden="true"></i> info@argentour.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="paquetes.html">Paquetes</a></li>
+                        <li><a href="ofertas.html">Ofertas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Argentour. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="script.js" defer></script>
+</body>
+</html>

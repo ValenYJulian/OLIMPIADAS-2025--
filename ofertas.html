@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argentour - Paquetes Turísticos en Argentina</title>
+    <meta name="description" content="Descubre los mejores paquetes turísticos por Argentina. Bariloche, Buenos Aires, Mendoza y más con experiencias únicas.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (versión más reciente) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- Header con iconos actualizados -->
+    <header class="header" role="banner">
+        <div class="container">
+            <a href="ofertas.html" class="logo">
+                <img src="imagenes/logo-argentour.jpg" alt="Argentour - Viajes por Argentina" width="180" height="60">
+            </a>
+            <nav class="navbar" role="navigation">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="paquetes.html" class="active" aria-current="page">Paquetes</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button id="search-btn" aria-label="Buscar"><i class="fas fa-search" role="img"></i></button>
+                <button id="cart-btn" aria-label="Carrito de compras" aria-expanded="false">
+                    <i class="fas fa-shopping-cart" role="img"></i>
+                    <span class="cart-count">0</span>
+                </button>
+                <button id="user-btn" aria-label="Iniciar sesión"><i class="fas fa-user" role="img"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section con video de fondo como en index.html -->
+    <section class="hero" role="region" aria-labelledby="hero-heading">
+        <div class="hero-video">
+            <video autoplay muted loop playsinline>
+                <source src="imagenes/argentina-hero.mp4" type="video/mp4">
+                <img src="imagenes/hero-fallback.jpg" alt="Vistas de Argentina">
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <h1 id="hero-heading">Descubre la belleza de Argentina</h1>
+            <p>Encuentra los mejores paquetes turísticos para tu próximo viaje</p>
+            <form class="search-box" action="busqueda.html" method="GET" role="search">
+                <div class="search-input">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" placeholder="¿A dónde quieres ir?" aria-label="Destino">
+                </div>
+                <div class="search-input">
+                    <i class="far fa-calendar"></i>
+                    <input type="text" placeholder="Fecha" onfocus="(this.type='date')" aria-label="Fecha">
+                </div>
+                <div class="search-input">
+                    <i class="fas fa-user-friends"></i>
+                    <select aria-label="Personas">
+                        <option value="">Personas</option>
+                        <option value="1">1 persona</option>
+                        <option value="2">2 personas</option>
+                        <option value="3">3 personas</option>
+                        <option value="4">4 personas</option>
+                        <option value="5+">5+ personas</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Buscar
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <main role="main">
+        <!-- Sección de paquetes con fondo blanco -->
+        <section class="paquetes" aria-labelledby="paquetes-heading">
+            <div class="container">
+                <h1 id="paquetes-heading" class="page-title">Paquetes Turísticos de Argentina</h1>
+                <div class="contenedor-paquetes">
+                    <!-- Paquete 1 - Buenos Aires -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/buenos aires.webp" alt="Vistas de Buenos Aires" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Buenos Aires Clásica</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Buenos Aires</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.8</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$25.999</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="1" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Paquete 2 - Bariloche -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/bariloche.jpg" alt="Vistas de Bariloche" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Bariloche y la Ruta de los Siete Lagos</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Bariloche</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.9</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$35.999</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="2" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Paquete 3 - Mar del Plata -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/mar del plata.webp" alt="Playas de Mar del Plata" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Mar del Plata Premium</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Mar del Plata</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.7</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$22.999</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="3" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Paquete 4 - Mendoza -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/san jose mendoza.jpg" alt="Viñedos de Mendoza" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Ruta del Vino en Mendoza</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Mendoza</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.9</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$32.500</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="4" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Paquete 5 - Iguazú -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/cataratas del iguazu.jpeg" alt="Cataratas del Iguazú" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Cataratas del Iguazú</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Misiones</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 5.0</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$28.750</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="5" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Paquete 6 - Esteros del Iberá -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/mantilla corrientes.jpg" alt="Esteros del Iberá" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Bella Vista</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Corrientes</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.6</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$27.300</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="6" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Paquete 7 - Salta -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/tren-a-las-nubes.webp" alt="Salta y Cafayate" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Tren de las nubes</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Salta</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.8</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$30.200</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="7" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Paquete 8 - Ushuaia -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/tierra del fuego.webp" alt="Ushuaia" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Fin del Mundo - Ushuaia</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Tierra del Fuego</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.9</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$38.500</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="8" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Paquete 9 - Córdoba -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/7 cascadas.png" alt="Sierras de Córdoba" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>7 Cascadas</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Córdoba</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.7</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$23.800</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="9" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Paquete 10 - Jujuy -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/cerro de los 7 colores.jpg" alt="Quebrada de Humahuaca" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Cerro de los 7 colores</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Jujuy</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.9</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$29.500</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="10" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Paquete 11 - Puerto Madryn -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/avistaje-de-ballenas_107_201605050852271.Mobile.jpg" alt="Ballenas en Puerto Madryn" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Visita de Ballenas</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Puerto Madryn</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 4.8</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$34.200</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="11" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Paquete 12 - tucuman -->
+                    <article class="paquete-card" role="article">
+                        <div class="paquete-img">
+                            <img src="imagenes/1_discover-tafi-del-valle-guided-journey.jpg" alt="Glaciar Perito Moreno" loading="lazy">
+                            <div class="paquete-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="paquete-info">
+                            <h3>Tafí del Valle</h3>
+                            <div class="paquete-meta">
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Tucuman</span>
+                                <span><i class="fas fa-star" aria-hidden="true"></i> 5.0</span>
+                            </div>
+                            <div class="paquete-price">
+                                <span>Desde</span>
+                                <strong>$41.000</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="paquete-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="12" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nueva sección de Newsletter -->
+        <section class="newsletter" aria-labelledby="newsletter-heading">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2 id="newsletter-heading">Recibe nuestras mejores ofertas</h2>
+                    <p>Suscríbete y sé el primero en conocer nuestras promociones exclusivas</p>
+                    <form class="newsletter-form" role="form">
+                        <div class="form-group">
+                            <label for="newsletter-email" class="visually-hidden">Tu correo electrónico</label>
+                            <input type="email" id="newsletter-email" placeholder="Tu correo electrónico" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Suscribirse</button>
+                    </form>
+                    <p class="newsletter-note">Prometemos no enviarte spam. Puedes darte de baja en cualquier momento.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Argentour</h4>
+                    <p>Tu agencia de viajes especializada en Argentina. Ofrecemos las mejores experiencias turísticas con calidad y seguridad.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Contacto</h4>
+                    <p><i class="fas fa-phone" aria-hidden="true"></i> +54 11 1234-5678</p>
+                    <p><i class="fas fa-envelope" aria-hidden="true"></i> info@argentour.com</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="paquetes.html">Paquetes</a></li>
+                        <li><a href="ofertas.html">Ofertas</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Argentour. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
+        <div class="cart-header">
+            <h3 id="cart-title">Tu Carrito</h3>
+            <button id="close-cart" aria-label="Cerrar carrito"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <p class="empty-cart-message">Tu carrito está vacío</p>
+        </div>
+        <div class="cart-total">
+            <p>Total: <span id="cart-total-price">$0</span></p>
+            <button class="btn-primary" id="checkout-btn">Proceder al pago</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cart-overlay"></div>
+
+    <!-- Script para Font Awesome (versión más reciente) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="script.js" defer></script>
+
+    <script>
+        // Funcionalidad del carrito
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartBtn = document.getElementById('cart-btn');
+            const closeCartBtn = document.getElementById('close-cart');
+            const cartSidebar = document.getElementById('cart-sidebar');
+            const cartOverlay = document.getElementById('cart-overlay');
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotalPrice = document.getElementById('cart-total-price');
+            const cartCount = document.querySelector('.cart-count');
+            const addToCartButtons = document.querySelectorAll('.agregar-carrito');
+            
+            let cart = [];
+            
+            // Abrir/cerrar carrito
+            cartBtn.addEventListener('click', function() {
+                cartSidebar.removeAttribute('hidden');
+                cartOverlay.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeCartBtn.addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+            
+            function closeCart() {
+                cartSidebar.setAttribute('hidden', 'true');
+                cartOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            // Añadir al carrito
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const card = this.closest('.paquete-card');
+                    const title = card.querySelector('h3').textContent;
+                    const price = card.querySelector('.paquete-price strong').textContent;
+                    
+                    // Verificar si ya está en el carrito
+                    const existingItem = cart.find(item => item.id === id);
+                    
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            id,
+                            title,
+                            price,
+                            quantity: 1
+                        });
+                    }
+                    
+                    updateCart();
+                    showAddedToCartNotification(title);
+                });
+            });
+            
+            // Actualizar carrito
+            function updateCart() {
+                // Limpiar carrito
+                cartItemsContainer.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    cartItemsContainer.innerHTML = '<p class="empty-cart-message">Tu carrito está vacío</p>';
+                    cartTotalPrice.textContent = '$0';
+                    cartCount.textContent = '0';
+                    return;
+                }
+                
+                // Calcular total y mostrar items
+                let total = 0;
+                
+                cart.forEach(item => {
+                    const itemPrice = parseFloat(item.price.replace('$', '').replace('.', '').replace(',', '.'));
+                    total += itemPrice * item.quantity;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <div class="cart-item-info">
+                            <h4>${item.title}</h4>
+                            <p>${item.price} x ${item.quantity}</p>
+                        </div>
+                        <button class="btn btn-icon remove-item" data-id="${item.id}" aria-label="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    cartItemsContainer.appendChild(cartItem);
+                });
+                
+                // Actualizar total y contador
+                cartTotalPrice.textContent = `$${total.toLocaleString('es-AR')}`;
+                cartCount.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+                
+                // Agregar eventos a los botones de eliminar
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        cart = cart.filter(item => item.id !== id);
+                        updateCart();
+                    });
+                });
+            }
+            
+            // Mostrar notificación de añadido al carrito
+            function showAddedToCartNotification(title) {
+                const notification = document.createElement('div');
+                notification.className = 'cart-notification';
+                notification.innerHTML = `
+                    <i class="fas fa-check-circle"></i>
+                    <span>${title} añadido al carrito</span>
+                `;
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(notification);
+                    }, 300);
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>

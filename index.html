@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argentour - Descubre Argentina</title>
+    <meta name="description" content="Paquetes turísticos exclusivos en Argentina. Cataratas del Iguazú, Bariloche, Ushuaia y más con las mejores ofertas.">
+    
+    <!-- Preloads para mejor performance -->
+    <link rel="preload" href="styles.css" as="style">
+    <link rel="preload" href="script.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="imagenes/apple-touch-icon.png">
+    
+    <!-- Meta redes sociales -->
+    <meta property="og:title" content="Argentour - Paquetes Turísticos en Argentina">
+    <meta property="og:description" content="Descubre los mejores destinos de Argentina con nuestras ofertas exclusivas">
+    <meta property="og:image" content="imagenes/og-image.jpg">
+    <meta property="og:url" content="https://www.argentour.com">
+    <meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+    <!-- Header con efecto scroll -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="Argentour - Inicio">
+                <img src="imagenes/logo-argentour.jpg" alt="Argentour Logo" width="120" height="60" loading="lazy">
+                <span>Argentour</span>
+            </a>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Menú</span>
+                <span class="menu-icon"></span>
+            </button>
+            
+            <nav class="navbar" id="navbar">
+                <ul>
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="paquetes.html">Paquetes</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <button id="search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                <div class="cart-wrapper">
+                    <button id="cart-btn" aria-label="Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                    
+                    <!-- Carrito desplegable -->
+                    <div class="cart-dropdown" id="cart-dropdown">
+                        <div class="cart-header">
+                            <h3>Tu Carrito</h3>
+                            <button id="close-cart" aria-label="Cerrar carrito">&times;</button>
+                        </div>
+                        <div class="cart-items" id="cart-items">
+                            <!-- Items del carrito se añadirán aquí dinámicamente -->
+                            <div class="empty-cart">
+                                <i class="fas fa-shopping-bag"></i>
+                                <p>Tu carrito está vacío</p>
+                                <a href="paquetes.html" class="btn btn-outline">Ver paquetes</a>
+                            </div>
+                        </div>
+                        <div class="cart-footer">
+                            <div class="cart-total">
+                                <span>Total:</span>
+                                <span id="cart-total-price">$0</span>
+                            </div>
+                            <a href="checkout.html" class="btn btn-checkout">Finalizar Compra</a>
+                        </div>
+                    </div>
+                </div>
+                <button id="user-btn" aria-label="Usuario"><i class="fas fa-user"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Barra de búsqueda móvil -->
+    <div class="mobile-search" id="mobile-search">
+        <div class="container">
+            <form action="busqueda.html" method="GET">
+                <input type="text" placeholder="Buscar destinos, paquetes..." aria-label="Buscar">
+                <button type="submit" aria-label="Enviar búsqueda"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Hero section con imagen de fondo -->
+        <section class="hero">
+    
+                </video>
+                <div class="hero-overlay"></div>
+            </div>
+            
+            <div class="hero-content">
+                <h1 class="hero-title">Descubre la belleza de <span>Argentina</span></h1>
+                <p class="hero-subtitle">Paquetes turísticos exclusivos con las mejores experiencias</p>
+                
+                <form class="search-box" action="busqueda.html" method="GET">
+                    <div class="search-input">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" placeholder="¿A dónde quieres ir?" aria-label="Destino" id="destino-input">
+                        <div class="suggestions" id="destino-suggestions"></div>
+                    </div>
+                    <div class="search-input">
+                        <i class="far fa-calendar"></i>
+                        <input type="text" placeholder="Fecha" onfocus="(this.type='date')" aria-label="Fecha">
+                    </div>
+                    <div class="search-input">
+                        <i class="fas fa-user-friends"></i>
+                        <select aria-label="Personas">
+                            <option value="">Personas</option>
+                            <option value="1">1 persona</option>
+                            <option value="2">2 personas</option>
+                            <option value="3">3 personas</option>
+                            <option value="4">4 personas</option>
+                            <option value="5+">5+ personas</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </form>
+                
+                <div class="hero-scroll">
+                    <span>Explora más</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de destinos destacados -->
+        <section class="destacados">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Destinos <span>Destacados</span></h2>
+                    <p>Los lugares más visitados de Argentina</p>
+                </div>
+                
+                <div class="destinos-grid">
+                    <!-- Destino 1 - Cataratas del Iguazú -->
+                    <article class="destino-card" data-destino="cataratas">
+                        <div class="destino-img">
+                            <img src="imagenes/cataratas del iguazu.jpeg" alt="Cataratas del Iguazú" loading="lazy">
+                            <div class="destino-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <span class="destino-tag">Más visitado</span>
+                            </div>
+                        </div>
+                        <div class="destino-info">
+                            <div class="destino-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Misiones</span>
+                                <span><i class="fas fa-star"></i> 4.8</span>
+                            </div>
+                            <h3>Cataratas del Iguazú</h3>
+                            <p class="destino-desc">Una de las 7 maravillas naturales del mundo con 275 saltos de agua.</p>
+                            <div class="destino-price">
+                                <span>Desde</span>
+                                <strong>$25.999</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="destino-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="1" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Destino 2 - Bariloche -->
+                    <article class="destino-card" data-destino="bariloche">
+                        <div class="destino-img">
+                            <img src="imagenes/bariloche.jpg" alt="San Carlos de Bariloche" loading="lazy">
+                            <div class="destino-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="destino-info">
+                            <div class="destino-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Río Negro</span>
+                                <span><i class="fas fa-star"></i> 4.7</span>
+                            </div>
+                            <h3>San Carlos de Bariloche</h3>
+                            <p class="destino-desc">Paraíso de montañas, lagos y chocolate en la Patagonia.</p>
+                            <div class="destino-price">
+                                <span>Desde</span>
+                                <strong>$35.999</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="destino-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="2" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Destino 3 - Ushuaia -->
+                    <article class="destino-card" data-destino="ushuaia">
+                        <div class="destino-img">
+                            <img src="imagenes/tierra del fuego.webp" alt="Ushuaia" loading="lazy">
+                            <div class="destino-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <span class="destino-tag">Oferta</span>
+                            </div>
+                        </div>
+                        <div class="destino-info">
+                            <div class="destino-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Tierra del Fuego</span>
+                                <span><i class="fas fa-star"></i> 4.6</span>
+                            </div>
+                            <h3>Ushuaia</h3>
+                            <p class="destino-desc">La ciudad más austral del mundo, puerta a la Antártida.</p>
+                            <div class="destino-price">
+                                <span>Desde</span>
+                                <strong>$42.999</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="destino-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="3" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Destino 4 - Mendoza -->
+                    <article class="destino-card" data-destino="mendoza">
+                        <div class="destino-img">
+                            <img src="imagenes/san jose mendoza.jpg" alt="Mendoza" loading="lazy">
+                            <div class="destino-overlay">
+                                <button class="btn btn-favorite" aria-label="Guardar en favoritos">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="destino-info">
+                            <div class="destino-meta">
+                                <span><i class="fas fa-map-marker-alt"></i> Mendoza</span>
+                                <span><i class="fas fa-star"></i> 4.5</span>
+                            </div>
+                            <h3>Mendoza</h3>
+                            <p class="destino-desc">Tierra del vino, montañas imponentes y aventura.</p>
+                            <div class="destino-price">
+                                <span>Desde</span>
+                                <strong>$28.999</strong>
+                                <span class="price-detail">por persona</span>
+                            </div>
+                            <div class="destino-actions">
+                                <a href="paquete-detalle.html" class="btn btn-secondary">Ver paquete</a>
+                                <button class="btn btn-icon agregar-carrito" data-id="4" aria-label="Añadir al carrito">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                
+                <div class="section-footer">
+                    <a href="paquetes.html" class="btn btn-outline">Ver todos los destinos</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de experiencias -->
+        <section class="experiencias">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Experiencias <span>Únicas</span></h2>
+                    <p>Vive momentos inolvidables en Argentina</p>
+                </div>
+                
+                <div class="experiencias-grid">
+                    <div class="experiencia-card">
+                        <div class="experiencia-img">
+                            <img src="imagenes/vino.webp" alt="Ruta del Vino" loading="lazy">
+                        </div>
+                        <div class="experiencia-content">
+                            <h3>Ruta del Vino</h3>
+                            <p>Degustación en las mejores bodegas de Mendoza con alojamiento en viñedos.</p>
+                            <a href="#" class="btn btn-link">Descubrir más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="experiencia-card">
+                        <div class="experiencia-img">
+                            <img src="imagenes/oto.jpg" alt="Cerro otto" loading="lazy">
+                        </div>
+                        <div class="experiencia-content">
+                            <h3>Cerro otto en Bariloche</h3>
+                            <p>paseos en cuatriciclos con orugas, motos de nieve, caminatas con raquetas y mucho más. <br>
+                            Sin lugar a dudas la gran protagonista es la práctica del esquí nórdico.</p>
+                            <a href="#" class="btn btn-link">Descubrir más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="experiencia-card">
+                        <div class="experiencia-img">
+                            <img src="imagenes/tango.webp" alt="Noche de Tango" loading="lazy">
+                        </div>
+                        <div class="experiencia-content">
+                            <h3>Noche de Tango</h3>
+                            <p>Cena show en los mejores locales tangueros de Buenos Aires.</p>
+                            <a href="#" class="btn btn-link">Descubrir más <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de ofertas especiales -->
+        <section class="ofertas">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Ofertas <span>Especiales</span></h2>
+                    <p>Aprovecha nuestras promociones por tiempo limitado</p>
+                </div>
+                
+                <div class="ofertas-slider">
+                    <!-- Oferta 1 -->
+                    <div class="oferta-card destacada">
+                        <div class="oferta-badge">-30%</div>
+                        <div class="oferta-img">
+                            <img src="imagenes/tierra del fuego.webp" alt="Oferta Ushuaia" loading="lazy">
+                        </div>
+                        <div class="oferta-info">
+                            <h3>Fin del Mundo en Ushuaia</h3>
+                            <p class="oferta-desc">4 días / 3 noches con vuelos incluidos</p>
+                            <div class="oferta-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Válido hasta 30/11/2026</span>
+                                <span><i class="fas fa-users"></i> 2 personas</span>
+                            </div>
+                            <div class="oferta-price">
+                                <span class="old-price">$42.999</span>
+                                <span class="new-price">$30.099</span>
+                            </div>
+                            <div class="oferta-actions">
+                                <button class="btn btn-primary agregar-carrito" data-id="5">Reservar ahora</button>
+                                <a href="paquete-detalle.html" class="btn btn-outline">Ver detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Oferta 2 -->
+                    <div class="oferta-card">
+                        <div class="oferta-badge">-25%</div>
+                        <div class="oferta-img">
+                            <img src="imagenes/bariloche.jpg" alt="Oferta Bariloche" loading="lazy">
+                        </div>
+                        <div class="oferta-info">
+                            <h3>Bariloche Premium</h3>
+                            <p class="oferta-desc">5 días / 4 noches en hotel 5 estrellas</p>
+                            <div class="oferta-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Válido hasta 15/12/2026</span>
+                                <span><i class="fas fa-users"></i> 2 personas</span>
+                            </div>
+                            <div class="oferta-price">
+                                <span class="old-price">$50.999</span>
+                                <span class="new-price">$38.249</span>
+                            </div>
+                            <div class="oferta-actions">
+                                <button class="btn btn-primary agregar-carrito" data-id="6">Reservar ahora</button>
+                                <a href="paquete-detalle.html" class="btn btn-outline">Ver detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Oferta 3 -->
+                    <div class="oferta-card">
+                        <div class="oferta-badge">-20%</div>
+                        <div class="oferta-img">
+                            <img src="imagenes/san jose mendoza.jpg" alt="Oferta Mendoza" loading="lazy">
+                        </div>
+                        <div class="oferta-info">
+                            <h3>Mendoza Todo Incluido</h3>
+                            <p class="oferta-desc">3 días / 2 noches con tours en bodegas</p>
+                            <div class="oferta-meta">
+                                <span><i class="fas fa-calendar-alt"></i> Válido hasta 20/11/2026</span>
+                                <span><i class="fas fa-users"></i> 2 personas</span>
+                            </div>
+                            <div class="oferta-price">
+                                <span class="old-price">$28.999</span>
+                                <span class="new-price">$23.199</span>
+                            </div>
+                            <div class="oferta-actions">
+                                <button class="btn btn-primary agregar-carrito" data-id="7">Reservar ahora</button>
+                                <a href="paquete-detalle.html" class="btn btn-outline">Ver detalles</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de testimonios -->
+        <section class="testimonios">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Lo que dicen <span>nuestros viajeros</span></h2>
+                    <p>Experiencias reales de nuestros clientes</p>
+                </div>
+                
+                <div class="testimonios-slider">
+                    <!-- Testimonio 1 -->
+                    <div class="testimonio-card">
+                        <div class="testimonio-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonio-text">"Excelente servicio. El paquete a Salta superó todas nuestras expectativas. ¡Volveremos a viajar con Argentour!"</p>
+                        <div class="testimonio-author">
+                            <img src="imagenes/usuario.png" alt="María González" loading="lazy">
+                            <div>
+                                <h4>María González</h4>
+                                <span>Viajó a Salta</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonio 2 -->
+                    <div class="testimonio-card">
+                        <div class="testimonio-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="testimonio-text">"La organización del viaje a Bariloche fue impecable. Todo salió perfecto y los precios son muy competitivos."</p>
+                        <div class="testimonio-author">
+                            <img src="imagenes/usuario.png" alt="Carlos Martínez" loading="lazy">
+                            <div>
+                                <h4>Carlos Martínez</h4>
+                                <span>Viajó a Bariloche</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonio 3 -->
+                    <div class="testimonio-card">
+                        <div class="testimonio-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="testimonio-text">"Muy buena atención al cliente. Nos ayudaron con todo y resolvieron nuestras dudas rápidamente. Recomendado 100%."</p>
+                        <div class="testimonio-author">
+                            <img src="imagenes/usuario.png" alt="Laura Fernández" loading="lazy">
+                            <div>
+                                <h4>Laura Fernández</h4>
+                                <span>Viajó a Mendoza</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de newsletter -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Recibe nuestras <span>mejores ofertas</span></h2>
+                    <p>Suscríbete y sé el primero en conocer nuestras promociones exclusivas</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Tu correo electrónico" aria-label="Correo electrónico" required>
+                        <button type="submit" class="btn btn-primary">Suscribirse</button>
+                    </form>
+                    <p class="newsletter-note">Prometemos no enviarte spam. Puedes darte de baja en cualquier momento.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Argentour</h3>
+                    <p>La mejor agencia de viajes en Argentina, ofreciendo experiencias únicas desde 2010.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Destinos</h3>
+                    <ul>
+                        <li><a href="#">Buenos Aires</a></li>
+                        <li><a href="#">Cataratas del Iguazú</a></li>
+                        <li><a href="#">Bariloche</a></li>
+                        <li><a href="#">Mendoza</a></li>
+                        <li><a href="#">Ushuaia</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Empresa</h3>
+                    <ul>
+                        <li><a href="#">Sobre nosotros</a></li>
+                        <li><a href="#">Blog de viajes</a></li>
+                        <li><a href="#">Trabaja con nosotros</a></li>
+                        <li><a href="#">Prensa</a></li>
+                        <li><a href="#">Sostenibilidad</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Av. Corrientes 1234, CABA</li>
+                        <li><i class="fas fa-phone"></i> +54 11 1234-5678</li>
+                        <li><i class="fas fa-envelope"></i> info@argentour.com</li>
+                        <li><i class="fas fa-clock"></i> Lunes a Viernes: 9 a 18hs</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="payment-methods">
+                    <h4>Métodos de pago:</h4>
+                    <div class="payment-icons">
+                        <i class="fab fa-cc-visa"></i>
+                        <i class="fab fa-cc-mastercard"></i>
+                        <i class="fab fa-cc-amex"></i>
+                        <i class="fab fa-cc-paypal"></i>
+                        <i class="fab fa-cc-diners-club"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="terminos.html">Términos y condiciones</a>
+                    <a href="privacidad.html">Política de privacidad</a>
+                    <a href="preguntas.html">Preguntas frecuentes</a>
+                    <a href="seguridad.html">Seguridad</a>
+                </div>
+                
+                <p class="copyright">&copy; 2025 Argentour. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón de WhatsApp flotante -->
+    <a href="https://wa.me/5491112345678" class="whatsapp-btn" aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

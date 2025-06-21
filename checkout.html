@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Argentour</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="styles.css" rel="stylesheet">
+    <style>
+    * {
+        box-sizing: border-box;
+        font-family: 'Montserrat', 'Arial', sans-serif;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #fffcfa; /* Fondo blanco sólido */
+        color: #333; /* Texto más oscuro para mejor contraste */
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .header {
+        background-color: #fffcfa; /* Verde oscuro para el header */
+        padding: 15px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .checkout-container {
+        max-width: 1200px;
+        margin: 30px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border: 1px solid #e0e0e0;
+        flex-grow: 1;
+    }
+    
+    h1 {
+        color: #40B5CB; /* Verde oscuro para los títulos */
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: 2.2rem;
+        font-weight: 700;
+        position: relative;
+        padding-bottom: 15px;
+    }
+    
+    h1::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 3px;
+        background: linear-gradient(90deg, #40B5CB, #2E8BA0);
+        border-radius: 3px;
+    }
+    
+    h2 {
+        color: #40B5CB;
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        font-weight: 600;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    h2::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 2px;
+        background: #40B5CB;
+    }
+    
+    .checkout-grid {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        gap: 30px;
+    }
+    
+    .form-section, .order-summary {
+        padding: 25px;
+        border-radius: 8px;
+        background: #f9f9f9; /* Fondo gris claro para las secciones */
+        border: 1px solid #e0e0e0;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+        color: #555;
+    }
+    
+    input, select {
+        width: 100%;
+        padding: 12px 15px;
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+        color: #333;
+        transition: all 0.3s;
+    }
+    
+    input:focus, select:focus {
+        outline: none;
+        border-color: #40B5CB;
+        box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
+    }
+    
+    .order-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #e0e0e0;
+        color: #555;
+    }
+    
+    .total {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-top: 25px;
+        padding-top: 15px;
+        border-top: 2px solid #e0e0e0;
+        color: #40B5CB;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .btn {
+        background: linear-gradient(135deg, #40B5CB, #40B5CB);
+        color: white;
+        border: none;
+        padding: 15px;
+        width: 100%;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 6px;
+        margin-top: 20px;
+        transition: all 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    .btn:hover {
+        background: linear-gradient(135deg, #40B5CB, #40B5CB);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .payment-option {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        padding: 15px;
+        background: #ffffff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .payment-option:hover {
+        border-color: #40B5CB;
+        background: #f5f5f5;
+    }
+    
+    .payment-option input {
+        width: auto;
+        margin-right: 15px;
+        accent-color: #40B5CB;
+    }
+    
+    .payment-icon {
+        margin-right: 15px;
+        font-size: 28px;
+        color: #777;
+    }
+    
+    #credit-card-fields {
+        margin-top: 20px;
+        padding: 20px;
+        background: #ffffff;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        animation: fadeIn 0.5s ease-out;
+    }
+    
+    .order-terms {
+        margin-top: 25px;
+        font-size: 0.85rem;
+        color: #777;
+        text-align: center;
+    }
+    
+    .order-terms a {
+        color: #40B5CB;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    
+    /* Resto de estilos se mantienen igual */
+    /* ... */
+</style>
+</head>
+<body>
+    <!-- Header mejorado con menú accesible -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo" aria-label="Argentour - Inicio">
+                <img src="imagenes/logo-argentour.jpg" alt="Argentour Logo" width="120" height="60" loading="lazy">
+                <span>Argentour</span>
+            </a>
+            
+            <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="navbar">
+                <i class="fas fa-bars"></i>
+                <span class="sr-only">Menú</span>
+            </button>
+            
+            <nav class="navbar" id="navbar">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="paquetes.html">Paquetes</a></li>
+                    <li><a href="ofertas.html">Ofertas</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <button id="search-btn" aria-label="Buscar"><i class="fas fa-search"></i></button>
+                <div class="cart-wrapper">
+                    <button id="cart-btn" aria-label="Carrito">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+                <button id="user-btn" aria-label="Usuario"><i class="fas fa-user"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <div class="checkout-container">
+        <h1>Finalizar Compra</h1>
+        
+        <div class="checkout-grid">
+            <div class="form-section">
+                <h2>Información de Envío</h2>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo</label>
+                        <input type="text" id="nombre" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Correo electrónico</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel" id="telefono" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="direccion">Dirección</label>
+                        <input type="text" id="direccion" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" id="ciudad" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="provincia">Provincia</label>
+                        <select id="provincia" required>
+                            <option value="">Seleccione una provincia</option>
+                            <option value="CABA">Ciudad Autónoma de Buenos Aires</option>
+                            <option value="BA">Buenos Aires</option>
+                            <option value="CT">Catamarca</option>
+                            <option value="CC">Chaco</option>
+                            <option value="CH">Chubut</option>
+                            <option value="CB">Córdoba</option>
+                            <option value="CR">Corrientes</option>
+                            <option value="ER">Entre Ríos</option>
+                            <option value="FO">Formosa</option>
+                            <option value="JY">Jujuy</option>
+                            <option value="LP">La Pampa</option>
+                            <option value="LR">La Rioja</option>
+                            <option value="MZ">Mendoza</option>
+                            <option value="MN">Misiones</option>
+                            <option value="NQ">Neuquén</option>
+                            <option value="RN">Río Negro</option>
+                            <option value="SA">Salta</option>
+                            <option value="SJ">San Juan</option>
+                            <option value="SL">San Luis</option>
+                            <option value="SC">Santa Cruz</option>
+                            <option value="SF">Santa Fe</option>
+                            <option value="SE">Santiago del Estero</option>
+                            <option value="TF">Tierra del Fuego</option>
+                            <option value="TM">Tucumán</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cp">Código Postal</label>
+                        <input type="text" id="cp" required>
+                    </div>
+                    
+                    <h2>Método de Pago</h2>
+                    
+                    <div class="payment-methods">
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="credit-card" checked>
+                            <i class="fab fa-cc-visa payment-icon"></i>
+                            Tarjeta de Crédito/Débito
+                        </label>
+                        
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="mercado-pago">
+                            <i class="fab fa-cc-mastercard payment-icon"></i>
+                            Mercado Pago
+                        </label>
+                        
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="paypal">
+                            <i class="fab fa-cc-paypal payment-icon"></i>
+                            PayPal
+                        </label>
+                        
+                        <label class="payment-option">
+                            <input type="radio" name="payment-method" value="transfer">
+                            <i class="fas fa-university payment-icon"></i>
+                            Transferencia Bancaria
+                        </label>
+                    </div>
+                    
+                    <div id="credit-card-fields">
+                        <div class="form-group">
+                            <label for="card-number">Número de Tarjeta</label>
+                            <input type="text" id="card-number" placeholder="1234 5678 9012 3456">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="card-name">Nombre en la Tarjeta</label>
+                            <input type="text" id="card-name">
+                        </div>
+                        
+                        <div class="form-group" style="display: flex; gap: 15px;">
+                            <div style="flex: 1;">
+                                <label for="card-expiry">Fecha de Expiración</label>
+                                <input type="text" id="card-expiry" placeholder="MM/AA">
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="card-cvv">CVV</label>
+                                <input type="text" id="card-cvv" placeholder="123">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn">Confirmar y Pagar</button>
+                </form>
+            </div>
+            
+            <div class="order-summary">
+                <h2>Resumen del Pedido</h2>
+                <div id="order-items">
+                    <!-- Productos del carrito se cargarán aquí dinámicamente -->
+                </div>
+                <div class="total">
+                    <span>Total:</span>
+                    <span id="order-total">$0</span>
+                </div>
+                
+                <div class="order-terms">
+                    <p><small>Al completar tu compra, aceptas nuestros <a href="terminos.html">Términos y Condiciones</a> y <a href="privacidad.html">Política de Privacidad</a>.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Manejo del menú hamburguesa
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const navbar = document.getElementById('navbar');
+            
+            menuToggle.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', !isExpanded);
+                navbar.classList.toggle('active');
+            });
+
+            // Cargar los items del carrito desde localStorage
+            function loadCartItems() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const orderItemsContainer = document.getElementById('order-items');
+                const orderTotalElement = document.getElementById('order-total');
+                
+                orderItemsContainer.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    orderItemsContainer.innerHTML = '<p style="color: #aaa;">No hay items en tu carrito</p>';
+                    orderTotalElement.textContent = '$0';
+                    return;
+                }
+                
+                let total = 0;
+                
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'order-item';
+                    itemElement.innerHTML = `
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>$${(item.price * item.quantity).toLocaleString('es-AR')}</span>
+                    `;
+                    orderItemsContainer.appendChild(itemElement);
+                    
+                    total += item.price * item.quantity;
+                });
+                
+                orderTotalElement.textContent = `$${total.toLocaleString('es-AR')}`;
+            }
+            
+            // Mostrar/ocultar campos de tarjeta de crédito según el método de pago seleccionado
+            const paymentMethods = document.querySelectorAll('input[name="payment-method"]');
+            const creditCardFields = document.getElementById('credit-card-fields');
+            
+            paymentMethods.forEach(method => {
+                method.addEventListener('change', function() {
+                    if (this.value === 'credit-card') {
+                        creditCardFields.style.display = 'block';
+                    } else {
+                        creditCardFields.style.display = 'none';
+                    }
+                });
+            });
+            
+            // Manejar el envío del formulario
+            const checkoutForm = document.getElementById('checkout-form');
+            checkoutForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                if (cart.length === 0) {
+                    alert('Tu carrito está vacío');
+                    return;
+                }
+                
+                // Aquí normalmente enviarías los datos a tu servidor para procesar el pago
+                // Por ahora simularemos un pago exitoso
+                
+                // Limpiar el carrito
+                localStorage.removeItem('cart');
+                document.querySelector('.cart-count').textContent = '0';
+                
+                // Redirigir a página de confirmación
+                window.location.href = 'confirmacion.html?order=' + Math.random().toString(36).substring(2, 15);
+            });
+            
+            // Cargar los items al iniciar
+            loadCartItems();
+            
+            // Actualizar contador del carrito
+            function updateCartCount() {
+                const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                document.querySelector('.cart-count').textContent = totalItems;
+            }
+            
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateCart();
             
             // Mostrar notificación
-            showNotification(`${title} añadido al carrito`);
+            showNotification(${title} añadido al carrito);
             
             // Guardar en localStorage
             localStorage.setItem('cart', JSON.stringify(cart));
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Actualizar total
-        cartTotalPrice.textContent = `$${total.toLocaleString('es-AR')}`;
+        cartTotalPrice.textContent = $${total.toLocaleString('es-AR')};
         
         // Añadir event listeners a los nuevos botones
         document.querySelectorAll('.quantity-btn').forEach(btn => {
@@ -415,11 +415,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function handleUserClick() {
-        // Aquí puedes agregar la lógica para el modal de usuario
-        alert('Funcionalidad de usuario: Iniciar sesión o ver perfil');
-    }
-    
     function addToCart() {
         const id = parseInt(this.getAttribute('data-id'));
         const paquete = paquetes.find(p => p.id === id);
@@ -448,7 +443,7 @@ document.addEventListener('DOMContentLoaded', function() {
         saveCartToLocalStorage();
         
         // Mostrar notificación
-        showNotification(`${paquete.nombre} añadido al carrito`);
+        showNotification(${paquete.nombre} añadido al carrito);
     }
     
     function updateCartUI() {
@@ -460,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function() {
         renderCartItems();
         
         // Actualizar total
-        cartTotalPrice.textContent = `$${total.toLocaleString('es-AR')}`;
+        cartTotalPrice.textContent = $${total.toLocaleString('es-AR')};
     }
     
     function renderCartItems() {
@@ -617,7 +612,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Total
         const total = carrito.reduce((sum, item) => sum + item.precio, 0);
-        cartTotal.innerText = `$${total.toLocaleString("es-AR")}`;
+        cartTotal.innerText = $${total.toLocaleString("es-AR")};
 
         // Mostrar ítems
         if (carrito.length === 0) {
@@ -638,7 +633,3 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
-
-
-
-

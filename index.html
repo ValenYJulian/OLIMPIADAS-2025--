@@ -5,26 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Argentour - Descubre Argentina</title>
     <meta name="description" content="Paquetes turísticos exclusivos en Argentina. Cataratas del Iguazú, Bariloche, Ushuaia y más con las mejores ofertas.">
-    
-    <!-- Preloads para mejor performance -->
     <link rel="preload" href="styles.css" as="style">
     <link rel="preload" href="script.js" as="script">
     <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
-    
-    <!-- Fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    
-    <!-- Estilos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Favicon -->
     <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="imagenes/apple-touch-icon.png">
-    
-    <!-- Meta redes sociales -->
     <meta property="og:title" content="Argentour - Paquetes Turísticos en Argentina">
     <meta property="og:description" content="Descubre los mejores destinos de Argentina con nuestras ofertas exclusivas">
     <meta property="og:image" content="imagenes/og-image.jpg">
@@ -32,7 +22,6 @@
     <meta name="twitter:card" content="summary_large_image">
 </head>
 <body>
-    <!-- Header con efecto scroll -->
     <header class="header">
         <div class="container">
             <a href="index.html" class="logo" aria-label="Argentour - Inicio">
@@ -60,15 +49,12 @@
                         <i class="fas fa-shopping-cart"></i>
                         <span class="cart-count">0</span>
                     </button>
-                    
-                    <!-- Carrito desplegable -->
                     <div class="cart-dropdown" id="cart-dropdown">
                         <div class="cart-header">
                             <h3>Tu Carrito</h3>
                             <button id="close-cart" aria-label="Cerrar carrito">&times;</button>
                         </div>
                         <div class="cart-items" id="cart-items">
-                            <!-- Items del carrito se añadirán aquí dinámicamente -->
                             <div class="empty-cart">
                                 <i class="fas fa-shopping-bag"></i>
                                 <p>Tu carrito está vacío</p>
@@ -84,12 +70,10 @@
                         </div>
                     </div>
                 </div>
-                <button id="user-btn" aria-label="Usuario"><i class="fas fa-user"></i></button>
+                <a href="inicios.html" id="user-btn" aria-label="Usuario"><i class="fas fa-user"></i></a>
             </div>
         </div>
     </header>
-
-    <!-- Barra de búsqueda móvil -->
     <div class="mobile-search" id="mobile-search">
         <div class="container">
             <form action="busqueda.html" method="GET">
@@ -98,10 +82,7 @@
             </form>
         </div>
     </div>
-
-    <!-- Contenido principal -->
     <main>
-        <!-- Hero section con imagen de fondo -->
         <section class="hero">
     
                 </video>
@@ -144,17 +125,13 @@
                 </div>
             </div>
         </section>
-
-        <!-- Sección de destinos destacados -->
         <section class="destacados">
             <div class="container">
                 <div class="section-header">
                     <h2>Destinos <span>Destacados</span></h2>
                     <p>Los lugares más visitados de Argentina</p>
                 </div>
-                
                 <div class="destinos-grid">
-                    <!-- Destino 1 - Cataratas del Iguazú -->
                     <article class="destino-card" data-destino="cataratas">
                         <div class="destino-img">
                             <img src="imagenes/cataratas del iguazu.jpeg" alt="Cataratas del Iguazú" loading="lazy">
@@ -185,8 +162,6 @@
                             </div>
                         </div>
                     </article>
-                    
-                    <!-- Destino 2 - Bariloche -->
                     <article class="destino-card" data-destino="bariloche">
                         <div class="destino-img">
                             <img src="imagenes/bariloche.jpg" alt="San Carlos de Bariloche" loading="lazy">
@@ -216,8 +191,6 @@
                             </div>
                         </div>
                     </article>
-                    
-                    <!-- Destino 3 - Ushuaia -->
                     <article class="destino-card" data-destino="ushuaia">
                         <div class="destino-img">
                             <img src="imagenes/tierra del fuego.webp" alt="Ushuaia" loading="lazy">
@@ -248,8 +221,6 @@
                             </div>
                         </div>
                     </article>
-                    
-                    <!-- Destino 4 - Mendoza -->
                     <article class="destino-card" data-destino="mendoza">
                         <div class="destino-img">
                             <img src="imagenes/san jose mendoza.jpg" alt="Mendoza" loading="lazy">
@@ -286,8 +257,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Sección de experiencias -->
         <section class="experiencias">
             <div class="container">
                 <div class="section-header">
@@ -332,8 +301,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Sección de ofertas especiales -->
         <section class="ofertas">
             <div class="container">
                 <div class="section-header">
@@ -342,7 +309,6 @@
                 </div>
                 
                 <div class="ofertas-slider">
-                    <!-- Oferta 1 -->
                     <div class="oferta-card destacada">
                         <div class="oferta-badge">-30%</div>
                         <div class="oferta-img">
@@ -365,8 +331,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Oferta 2 -->
                     <div class="oferta-card">
                         <div class="oferta-badge">-25%</div>
                         <div class="oferta-img">
@@ -389,8 +353,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Oferta 3 -->
                     <div class="oferta-card">
                         <div class="oferta-badge">-20%</div>
                         <div class="oferta-img">
@@ -416,8 +378,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Sección de testimonios -->
         <section class="testimonios">
             <div class="container">
                 <div class="section-header">
@@ -426,7 +386,6 @@
                 </div>
                 
                 <div class="testimonios-slider">
-                    <!-- Testimonio 1 -->
                     <div class="testimonio-card">
                         <div class="testimonio-rating">
                             <i class="fas fa-star"></i>
@@ -444,8 +403,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Testimonio 2 -->
                     <div class="testimonio-card">
                         <div class="testimonio-rating">
                             <i class="fas fa-star"></i>
@@ -463,8 +420,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Testimonio 3 -->
                     <div class="testimonio-card">
                         <div class="testimonio-rating">
                             <i class="fas fa-star"></i>
@@ -485,8 +440,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Sección de newsletter -->
         <section class="newsletter">
             <div class="container">
                 <div class="newsletter-content">
@@ -501,8 +454,6 @@
             </div>
         </section>
     </main>
-
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
@@ -574,13 +525,9 @@
             </div>
         </div>
     </footer>
-
-    <!-- Botón de WhatsApp flotante -->
     <a href="https://wa.me/5491112345678" class="whatsapp-btn" aria-label="Contactar por WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
-
-    <!-- Scripts -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
